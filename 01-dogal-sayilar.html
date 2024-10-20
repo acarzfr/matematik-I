@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="tr" xml:lang="tr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zafer Acar">
+
+<title>1&nbsp; Doğal Sayılar – Matematik I</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./99-kaynakca.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sonuç yok",
+    "search-matching-documents-text": "eşleşen belgeler",
+    "search-copy-link-title": "Aramak için bağlantıyı kopyalayın",
+    "search-hide-matches-text": "Ek eşleşmeleri gizle",
+    "search-more-match-text": "bu belgede daha fazla eşleşme",
+    "search-more-matches-text": "bu belgede daha fazla eşleşmeler",
+    "search-clear-button-title": "Temizle",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "İptal et",
+    "search-submit-button-title": "Göndermek",
+    "search-label": "Aramak"
+  }
+}</script>
+<style>
+    @import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+</style>
+
+
+<!-- SAGE -->
+ <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+
+
+ <script>
+     // Make the div with id 'mycell' a Sage cell
+     sagecell.makeSagecell({inputLocation:  'div.m_sage',
+                            linked: true,
+                            template: sagecell.templates.minimal,
+                            evalButtonText: "Hesapla (Sage)"});
+
+     // Make *any* div with class 'compute' a Sage cell
+     sagecell.makeSagecell({inputLocation: 'div.sage',
+                            linked: true,
+                            evalButtonText: "Hesapla (Sage)",
+                            hide: ["fullScreen", "permalink"],
+                  //        languages: ["sage", "r"],
+            
+
+     });
+
+     // Make *any* div with class 'compute' a Sage cell
+     sagecell.makeSagecell({inputLocation: 'div.o_sage',
+                            linked: true,
+                            autoeval: true,
+                        //  evalButtonText: "Çalıştır",
+                            hide: ["fullScreen", "permalink","editor","evalButton"],
+                  //        languages: ["sage", "r"],
+
+     });
+ </script>
+
+
+<!--  KULLANIM
+
+ <div class="sage"><script type="text/x-sage">
+ 2**52
+ </script>
+ </div>
+
+ -->
+
+<!--   GeoGebra  -->
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+
+<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+
+<!-- Kullanım
+
+<div id="ggb-element">
+<script>
+    var params = {"appName": "graphing", "width": 800, "height": 600, "showToolBar": true, "showAlgebraInput": true, "showMenuBar": true };
+    var applet = new GGBApplet(params, true);
+    window.addEventListener("load", function() {
+        applet.inject('ggb-element');
+    });
+</script>
+</div>
+
+Burada ggb-element .ggb uzantılı dosyanın adı
+-->
+
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-dogal-sayilar.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Doğal Sayılar</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Aramak" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Matematik I</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Okuyucu modunu değiştir">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Aramak"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hoşgeldiniz</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-dogal-sayilar.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Doğal Sayılar</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-kaynakca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kaynakça</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">İçindekiler</h2>
+   
+  <ul>
+  <li><a href="#onluk-sayı-sistemi" id="toc-onluk-sayı-sistemi" class="nav-link active" data-scroll-target="#onluk-sayı-sistemi">Onluk sayı sistemi</a></li>
+  <li><a href="#geometrik-temsil" id="toc-geometrik-temsil" class="nav-link" data-scroll-target="#geometrik-temsil">Geometrik temsil</a></li>
+  <li><a href="#doğal-sayılarla-işlemler" id="toc-doğal-sayılarla-işlemler" class="nav-link" data-scroll-target="#doğal-sayılarla-işlemler"><span class="header-section-number">1.1</span> Doğal Sayılarla İşlemler</a>
+  <ul class="collapse">
+  <li><a href="#toplama" id="toc-toplama" class="nav-link" data-scroll-target="#toplama">Toplama</a></li>
+  <li><a href="#çarpma" id="toc-çarpma" class="nav-link" data-scroll-target="#çarpma">Çarpma</a></li>
+  <li><a href="#çıkarma" id="toc-çıkarma" class="nav-link" data-scroll-target="#çıkarma">Çıkarma</a></li>
+  <li><a href="#bölme" id="toc-bölme" class="nav-link" data-scroll-target="#bölme">Bölme</a></li>
+  <li><a href="#kuvvet" id="toc-kuvvet" class="nav-link" data-scroll-target="#kuvvet">Kuvvet</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Doğal Sayılar</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Doğal sayıların kökeni tarihin derinliklerinde kaybolmuştur. İnsanların onları nasıl inşa ettiği ya da keşfettiği bilinmemektedir. Bu sayıların, insanlık dilinin kendisiyle birlikte ortaya çıkmış olabileceği düşünülmektedir.</p>
+<p>Çobanların, sürülerini saymak için, koyunlar ağıla girdikçe çubuklarına çentik attıklarını hayal edebiliriz: her koyun için bir çentik. Ancak, sayılması gereken nesneler çok olduğunda bu yöntem etkili değildir. Örneğin, bir çubuğa beş yüz çentik kazımanın zorluğunu hayal edin. Bu yüzden, büyük sayıları temsil etmek için belirli semboller kullanmaya ve aynı zamanda bu sembollerin kullanımına dair bazı kurallar belirlemeye başlanmış olabilir.</p>
+<div class="center">
+<p><a href="images/coban.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/coban.webp" class="img-fluid" style="width:50.0%"></a></p>
+</div>
+<p>Kesin olarak bildiğimiz şey, yaklaşık altı bin yıl önce Mısırlıların <span class="math inline">\(10\)</span>’un kuvvetlerini temsil etmek için belirli <a href="https://tr.wikipedia.org/wiki/Hiyeroglif">hiyeroglif</a>ler kullanarak sayılar yazdıklarıdır.</p>
+<div class="center">
+<p><a href="images/misir.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/misir.svg" class="img-fluid"></a></p>
+</div>
+<p>Romalılar ise, belirli kurallar çerçevesinde, her sayıyı temsil etmek için yedi sembol kullanıyordu. Bu semboller: <span class="math inline">\(I = 1\)</span>, <span class="math inline">\(V = 5\)</span>, <span class="math inline">\(X = 10\)</span>, <span class="math inline">\(L = 50\)</span>, <span class="math inline">\(C = 100\)</span>, <span class="math inline">\(D = 500\)</span>, <span class="math inline">\(M = 1000\)</span>. Örneğin, <span class="math inline">\(MM\)</span> sembolü <span class="math inline">\(1000 + 1000 = 2000\)</span> anlamına gelir; <span class="math inline">\(VI\)</span> sembolü <span class="math inline">\(5 + 1 = 6\)</span> ve <span class="math inline">\(IV\)</span> sembolü <span class="math inline">\(5 - 1 = 4\)</span> anlamına gelir. <span class="math inline">\(2024\)</span> yılı <span class="math inline">\(MMXXIV\)</span> olarak gösterilir.</p>
+<section id="onluk-sayı-sistemi" class="level3">
+<h3 class="anchored" data-anchor-id="onluk-sayı-sistemi">Onluk sayı sistemi</h3>
+<p>Romalıların sayıları yazma biçimi oldukça karmaşıktı, özellikle hesaplamalar sırasında. Modern sayı yazma sistemi ise sadece on sembol kullanır: <span class="math inline">\(0, 1, 2, 3, 4, 5, 6, 7, 8, 9\)</span>. Bu sembollere <strong>rakam</strong> denir. Bir <strong>sayı</strong>, sıralı olarak dizilmiş ve bazen tekrarlanmış rakamlardan oluşur.</p>
+<p>On sayısını temsil etmek için farklı bir sembol kullanılmaz, bunun yerine iki rakam yazılır: solda <span class="math inline">\(1\)</span> ve sağda <span class="math inline">\(0\)</span>. Bu yöntemi açıklamak için, her biri dokuz diski tutabilen dikey çubuklara sahip <a href="https://tr.wikipedia.org/wiki/Abak%C3%BCs">abaküs</a> adı verilen bir sayma aleti kullanırız. <span class="math inline">\(9\)</span> sayısını temsil etmek için, sağdaki ilk çubuğa dokuz disk yerleştiririz (<a href="#fig-9sayisi" class="quarto-xref">Görsel&nbsp;<span>1.1 (a)</span></a>). <span class="math inline">\(10\)</span> sayısını temsil etmek için, ilk çubuğu boşaltır ve ikinci çubuğa bir disk yerleştiririz (<a href="#fig-10sayisi" class="quarto-xref">Görsel&nbsp;<span>1.1 (b)</span></a>).</p>
+<div id="fig-abakus" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abakus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-abakus" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-9sayisi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-9sayisi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/9sayisi.svg" class="lightbox" data-gallery="fig-abakus" title="Görsel&nbsp;1.1&nbsp;(a): 9 sayısı"><img src="images/9sayisi.svg" class="img-fluid figure-img" data-ref-parent="fig-abakus"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-9sayisi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 9 sayısı
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-abakus" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-10sayisi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-10sayisi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/10sayisi.svg" class="lightbox" data-gallery="fig-abakus" title="Görsel&nbsp;1.1&nbsp;(b): 10 sayısı"><img src="images/10sayisi.svg" class="img-fluid figure-img" data-ref-parent="fig-abakus"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-10sayisi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 10 sayısı
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abakus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Görsel&nbsp;1.1: Abaküs
+</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(100\)</span> sayısını temsil etmek için, en sağdaki ilk iki çubuğu boşaltır ve üçüncü çubuğa bir disk yerleştiririz. Benzer şekilde, tüm <span class="math inline">\(10\)</span>’un kuvvetleri (on, yüz, bin vb.) bu şekilde temsil edilebilir. <span class="math inline">\(10\)</span>’un kuvvetleri onluk sistemde önemlidir çünkü bir sayıyı oluşturan her rakamın bulunduğu basamağı belirtirler. Abaküste her bir çubuk, <span class="math inline">\(10\)</span>’un bir kuvvetini ifade eder. Bir sayının değeri, her rakamın bulunduğu basamağın değeriyle çarpılması ve elde edilen değerlerin toplanmasıyla bulunur.</p>
+<p>Örneğin, üçüncü çubuğa yerleştirilen üç disk, <span class="math inline">\(3 \cdot 10^2 = 300\)</span> sayısını temsil eder. <span class="math inline">\(219\)</span> sayısı <span class="math inline">\(2 \cdot 10^2 + 1 \cdot 10 + 9\)</span> şeklinde yazılır.</p>
+<p>Sayı sistemimiz <strong>ondalık</strong> (veya <strong>10 tabanına dayalı</strong>) bir sistemdir, çünkü sayıları yazmak için on sembol (rakam) kullanıyoruz ve <strong>basamaklı</strong> bir sistemdir, çünkü aynı rakam bulunduğu basamağa göre farklı bir değer alır.</p>
+</section>
+<section id="geometrik-temsil" class="level3">
+<h3 class="anchored" data-anchor-id="geometrik-temsil">Geometrik temsil</h3>
+<p>Eşyaları ve insanları saymak için kullandığımız sayılara <strong>doğal sayılar</strong> denir. Bu sayıların kümesi <span class="math inline">\(\mathbb{N}\)</span> harfiyle gösterilir:</p>
+<p><span class="math display">\[
+\mathbb{N} = \{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, \dots \}
+\]</span></p>
+<p>Doğal sayılar bir sayı yarı doğrusu üzerinde temsil edilebilir: <span class="math inline">\(0\)</span> noktası, sayı yarı doğrusunun başlangıcı olarak alınır, sonra sağa doğru her adımda bir sonraki sayı gelir. Bu sayıları temsil etmek için, bir doğru üzerinde belirli bir uzunluk seçilir ve bu doğru, her adımda bir birim ilerlenerek bölümlenir.</p>
+<div class="center">
+<p><a href="images/dogalsayilar.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/dogalsayilar.svg" class="img-fluid"></a></p>
+</div>
+<p>Her doğal sayı, <span class="math inline">\(0\)</span>’dan başlayarak bir önceki sayıya eklenerek oluşturulur. <span class="math inline">\(1\)</span>, <span class="math inline">\(0\)</span>’dan sonraki birinci sayıdır; <span class="math inline">\(2\)</span>, <span class="math inline">\(1\)</span>’den sonraki birinci sayıdır; <span class="math inline">\(3\)</span>, <span class="math inline">\(2\)</span>’den sonraki birinci sayıdır, bu böyle devam eder. Her doğal sayının bir ardılı (bir sonraki sayısı) vardır ve sadece <span class="math inline">\(0\)</span>’ın bir öncülü (bir önceki sayısı) yoktur. <span class="math inline">\(\mathbb{N}\)</span> kümesi, sonlu bir başlangıç elemanına sahip ve bir sona sahip olmayan bir kümedir.</p>
+<p>Doğal sayılar sayı doğrusunun üzerinde soldan sağa doğru artar. Doğal sayılar, büyüklüklerine göre karşılaştırılabilir ve bunun için <span class="math inline">\(\leq\)</span> (bu “küçük ya da eşittir” anlamına gelir) ya da <span class="math inline">\(&lt;\)</span> (bu “küçüktür” anlamına gelir) sembolleri kullanılır.</p>
+</section>
+<section id="doğal-sayılarla-işlemler" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="doğal-sayılarla-işlemler"><span class="header-section-number">1.1</span> Doğal Sayılarla İşlemler</h2>
+<section id="toplama" class="level3">
+<h3 class="anchored" data-anchor-id="toplama">Toplama</h3>
+<div id="def-toplama" class="theorem definition">
+<p><span class="theorem-title"><strong>Tanım 1.1</strong></span> Doğal sayılar <span class="math inline">\(a\)</span> ve <span class="math inline">\(b\)</span> verildiğinde, bu sayılara <strong>toplanan</strong> denir ve <span class="math inline">\(a\)</span> ile <span class="math inline">\(b\)</span>’nin toplamından elde edilen üçüncü doğal sayı <span class="math inline">\(c\)</span>, <strong>toplam</strong> olarak adlandırılır. Bu sayı, <span class="math inline">\(a\)</span>’dan başlayarak <span class="math inline">\(b\)</span> kadar sağa doğru adım atarak elde edilir. Bu işlem <span class="math inline">\(a + b = c\)</span> olarak yazılır.</p>
+</div>
+<p>Örneğin, <span class="math inline">\(3 + 5\)</span> işlemini yapmak istersek, <span class="math inline">\(3\)</span>’ten başlayıp <span class="math inline">\(5\)</span> adım sağa doğru ilerlemeliyiz:</p>
+<div class="center">
+<p><a href="images/toplama.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/toplama.svg" class="img-fluid"></a></p>
+</div>
+<p>Sonuç <span class="math inline">\(3+5=8\)</span>’dir.</p>
+</section>
+<section id="çarpma" class="level3">
+<h3 class="anchored" data-anchor-id="çarpma">Çarpma</h3>
+<div id="def-carpma" class="theorem definition">
+<p><span class="theorem-title"><strong>Tanım 1.2</strong></span> Doğal sayılar <span class="math inline">\(a\)</span> ve <span class="math inline">\(b\)</span> verildiğinde, bu sayılara <strong>çarpan</strong> denir ve <span class="math inline">\(a\)</span> ile <span class="math inline">\(b\)</span>’nin çarpımından elde edilen doğal sayı, <strong>çarpım</strong> olarak adlandırılır. Bu, <span class="math inline">\(a\)</span> kadar <span class="math inline">\(b\)</span>’yi tekrar toplamakla elde edilir.</p>
+</div>
+<p>Örneğin, <span class="math inline">\(3 \cdot 2\)</span> işlemi için, <span class="math inline">\(2+2+2\)</span>’yi toplamalıyız ve sonuç <span class="math inline">\(6\)</span>’dır.</p>
+<p>Çarpma işlemi şu sembollerle gösterilir:</p>
+<p><span class="math display">\[
+c = a \cdot b \quad c = a \times b \quad c = a * b
+\]</span></p>
+<p>Toplama ve çarpma işlemleri <strong>kapalı işlemler</strong> olarak adlandırılır, çünkü bu işlemler doğal sayılar kümesinde yapıldığında her zaman bir doğal sayı sonucu verir.</p>
+</section>
+<section id="çıkarma" class="level3">
+<h3 class="anchored" data-anchor-id="çıkarma">Çıkarma</h3>
+<div id="def-cikarma" class="theorem definition">
+<p><span class="theorem-title"><strong>Tanım 1.3</strong></span> Doğal sayılar <span class="math inline">\(a\)</span> ve <span class="math inline">\(b\)</span> verildiğinde, <span class="math inline">\(a\)</span>’ya <strong>eksilen</strong> ve <span class="math inline">\(b\)</span>’ye <strong>çıkan</strong> denir. Eğer bir doğal sayı <span class="math inline">\(c\)</span> varsa ve bu sayı <span class="math inline">\(b\)</span>’ye eklendiğinde <span class="math inline">\(a\)</span>’yı veriyorsa, bu sayıya <strong>fark</strong> denir. Bu işlem <span class="math inline">\(a - b = c\)</span> olarak yazılır.</p>
+</div>
+<p>Örneğin, <span class="math inline">\(7 - 5 = 2\)</span>, çünkü <span class="math inline">\(5 + 2 = 7\)</span>. Ancak, <span class="math inline">\(5\)</span> ile <span class="math inline">\(7\)</span> arasındaki fark bulunamaz, çünkü <span class="math inline">\(7\)</span>’ye eklenen hiçbir doğal sayı <span class="math inline">\(5\)</span>’i vermez.</p>
+<p>Doğal sayılar, sayı doğrusunda yönlendirilmiş bir yarım doğru üzerinde gösterildiğinde, <span class="math inline">\(7\)</span> ve <span class="math inline">\(5\)</span> arasındaki fark, <span class="math inline">\(7\)</span>’den başlayıp <span class="math inline">\(5\)</span> adım geriye gidilerek bulunabilir.</p>
+<div class="center">
+<p><a href="images/cikarma1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/cikarma1.svg" class="img-fluid"></a></p>
+</div>
+<p>Bu nedenle, <span class="math inline">\(5\)</span> ile <span class="math inline">\(7\)</span> arasındaki farkın neden bulunamayacağı açıktır: Aslında, <span class="math inline">\(5\)</span>’ten başlayarak <span class="math inline">\(7\)</span> adım geriye gitmek mümkün değildir, çünkü <span class="math inline">\(0\)</span>’ın ötesine geçilemez; <span class="math inline">\(0\)</span>, doğal sayıların en küçüğüdür.</p>
+<div class="center">
+<p><a href="images/cikarma2.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="images/cikarma2.svg" class="img-fluid"></a></p>
+</div>
+<p><span class="math inline">\(\mathbb{N}\)</span> kümesinde, <span class="math inline">\(a - b\)</span> farkı yalnızca <span class="math inline">\(b \leq a\)</span> olduğunda mümkündür.</p>
+</section>
+<section id="bölme" class="level3">
+<h3 class="anchored" data-anchor-id="bölme">Bölme</h3>
+<div id="def-bolme" class="theorem definition">
+<p><span class="theorem-title"><strong>Tanım 1.4</strong></span> Doğal sayılar <span class="math inline">\(a\)</span> ve <span class="math inline">\(b\)</span>, <span class="math inline">\(b \neq 0\)</span> olmak üzere, <span class="math inline">\(a\)</span>’ya <strong>bölünen</strong>, <span class="math inline">\(b\)</span>’ye ise <strong>bölen</strong> denir. Eğer bir doğal sayı <span class="math inline">\(q\)</span> varsa ve bu sayı <span class="math inline">\(b\)</span> ile çarpıldığında <span class="math inline">\(a\)</span> elde ediliyorsa, <span class="math inline">\(q\)</span>’ya <strong>bölüm</strong> denir. Bu işlem <span class="math inline">\(a : b = q\)</span> olarak yazılır. Eğer bu bölüm varsa, <span class="math inline">\(a\)</span> sayısının <span class="math inline">\(b\)</span>’ye <strong>tam bölündüğü</strong> ya da <span class="math inline">\(a\)</span>’nın <span class="math inline">\(b\)</span>’nin bir <strong>katı</strong> olduğu söylenir.</p>
+</div>
+<p>Örneğin:</p>
+<ul>
+<li><p><span class="math inline">\(12 : 3 = 4\)</span>, çünkü <span class="math inline">\(4 \cdot 3 = 12\)</span> (Bu durumda <span class="math inline">\(12\)</span>, <span class="math inline">\(3\)</span>’e tam bölünür; <span class="math inline">\(3\)</span>, <span class="math inline">\(12\)</span>’nin bölenidir; <span class="math inline">\(12\)</span>, <span class="math inline">\(3\)</span>’ün katıdır).</p></li>
+<li><p><span class="math inline">\(5\)</span>, <span class="math inline">\(3\)</span>’ün katı değildir, çünkü <span class="math inline">\(3\)</span> ile çarpıldığında <span class="math inline">\(5\)</span>’i veren hiçbir doğal sayı yoktur.</p></li>
+</ul>
+<p>Bölmenin tanımında bölenin her zaman sıfırdan farklı olması gerektiğini belirttik. Eğer bölen <span class="math inline">\(0\)</span> ise, <span class="math inline">\(0\)</span> ile çarpıldığında bölüneni verecek bir sayı yoktur. Örneğin, <span class="math inline">\(3 : 0\)</span> işlemi için, <span class="math inline">\(0\)</span> ile çarptığında <span class="math inline">\(3\)</span>’ü verecek bir sayı bulmalıyız; bu mümkün değildir, çünkü <span class="math inline">\(0\)</span> ile çarpılan her sayı <span class="math inline">\(0\)</span> sonucunu verir. Ancak <span class="math inline">\(0 : 0\)</span> işlemi farklıdır: Bu durumda herhangi bir sayı bölüm olarak kabul edilebilir, çünkü <span class="math inline">\(0\)</span> ile çarpıldığında <span class="math inline">\(0\)</span> verecek herhangi bir sayı olabilir.</p>
+<p>Matematik dilinde, <span class="math inline">\(n : 0\)</span> (burada <span class="math inline">\(n \neq 0\)</span>) bölme işlemi <strong>imkansız</strong> olarak tanımlanır; <span class="math inline">\(0 : 0\)</span> bölme işlemi ise <strong>belirsiz</strong> olarak kabul edilir.</p>
+<section id="bölünebilme-kriterleri" class="level4">
+<h4 class="anchored" data-anchor-id="bölünebilme-kriterleri">Bölünebilme kriterleri</h4>
+<p>Bir sayının bazı doğal sayılara bölünüp bölünemeyeceğini kontrol etmek için, şu bilinen bölünebilme kriterleri uygulanabilir:</p>
+<ul>
+<li>Bir sayı, son rakamı çift ise <span class="math inline">\(2\)</span>’ye bölünebilir.</li>
+<li>Bir sayı, rakamlarının toplamı <span class="math inline">\(3\)</span>’e bölünebiliyorsa <span class="math inline">\(3\)</span>’e bölünebilir.</li>
+<li>Bir sayı, son rakamı <span class="math inline">\(0\)</span> veya <span class="math inline">\(5\)</span> ise <span class="math inline">\(5\)</span>’e bölünebilir.</li>
+<li>Bir sayı, rakamlarının toplamı <span class="math inline">\(9\)</span>’a bölünebiliyorsa <span class="math inline">\(9\)</span>’a bölünebilir.</li>
+<li>Bir sayı, son rakamı <span class="math inline">\(0\)</span> ise <span class="math inline">\(10\)</span>’a bölünebilir.</li>
+</ul>
+<p>Örneğin:</p>
+<ul>
+<li><span class="math inline">\(60\)</span> sayısı, <span class="math inline">\(2\)</span>’ye, <span class="math inline">\(3\)</span>’e, <span class="math inline">\(5\)</span>’e ve <span class="math inline">\(10\)</span>’a bölünebilir, ancak <span class="math inline">\(9\)</span>’a bölünemez.</li>
+<li><span class="math inline">\(123\)</span> sayısı, <span class="math inline">\(3\)</span>’e bölünebilir (çünkü rakamlarının toplamı <span class="math inline">\(1 + 2 + 3 = 6\)</span>), ancak <span class="math inline">\(2\)</span>’ye, <span class="math inline">\(5\)</span>’e, <span class="math inline">\(9\)</span>’a ve <span class="math inline">\(10\)</span>’a bölünemez.</li>
+</ul>
+</section>
+</section>
+<section id="kuvvet" class="level3">
+<h3 class="anchored" data-anchor-id="kuvvet">Kuvvet</h3>
+<p>Bir doğal sayının <strong>kuvveti</strong>, tüm çarpanları eşit olan bir çarpımdır.</p>
+<div id="def-kuvvet" class="theorem definition">
+<p><span class="theorem-title"><strong>Tanım 1.5</strong></span> Doğal sayılar <span class="math inline">\(a\)</span> ve <span class="math inline">\(b\)</span>, <span class="math inline">\(b &gt; 1\)</span> olmak üzere, <span class="math inline">\(a\)</span>’ya <strong>taban</strong>, <span class="math inline">\(b\)</span>’ye ise <strong>üs</strong> denir. <span class="math inline">\(a\)</span> üssü <span class="math inline">\(b\)</span> sayısı, <span class="math inline">\(b\)</span> tane <span class="math inline">\(a\)</span>’nın çarpılmasıyla elde edilen doğal sayıdır. Bu işlem <span class="math inline">\(a^b = c\)</span> şeklinde yazılır.</p>
+</div>
+<p>Örneğin, <span class="math inline">\(2^3 = 2 \cdot 2 \cdot 2 = 8\)</span>.</p>
+<p>Bu tanıma aşağıdaki özel durumlar eklenmelidir:</p>
+<ul>
+<li><span class="math inline">\(a^1 = a\)</span></li>
+<li><span class="math inline">\(a^0 = 1\)</span>, eğer <span class="math inline">\(a \neq 0\)</span></li>
+<li><span class="math inline">\(0^0\)</span> tanımsızdır.</li>
+</ul>
+<p>Bu tanımlar, kuvvetlerin aşağıdaki özelliklerinde açıklama bulur.</p>
+<section id="aynı-tabanlı-kuvvetlerin-çarpımı" class="level4">
+<h4 class="anchored" data-anchor-id="aynı-tabanlı-kuvvetlerin-çarpımı">Aynı tabanlı kuvvetlerin çarpımı</h4>
+<p>Aynı tabana sahip iki kuvvetin çarpımı, tabanı aynı olan ve üsleri toplamı kadar olan bir kuvvete eşittir.</p>
+<p><span class="math display">\[
+a^n \cdot a^m = a^{n+m}
+\]</span></p>
+<p>Örneğin, <span class="math inline">\(2^3 \cdot 2^4 = 2^{3+4} = 2^7\)</span>.</p>
+</section>
+<section id="aynı-tabanlı-kuvvetlerin-bölümü" class="level4">
+<h4 class="anchored" data-anchor-id="aynı-tabanlı-kuvvetlerin-bölümü">Aynı tabanlı kuvvetlerin bölümü</h4>
+<p>Aynı tabana sahip iki kuvvetin bölümü, üslerinden büyüğü küçük olana bölünür ve tabanı aynı olan bir kuvvete eşittir; bu kuvvetin üssü, üslerin <strong>farkı</strong> kadar olur.</p>
+<p><span class="math display">\[
+{a^n}:{a^m} = a^{n-m}
+\]</span></p>
+<p>Örneğin, <span class="math inline">\({2^7}:{2^4} = 2^{7-4} = 2^3\)</span>.</p>
+</section>
+<section id="bir-kuvvetin-kuvveti" class="level4">
+<h4 class="anchored" data-anchor-id="bir-kuvvetin-kuvveti">Bir kuvvetin kuvveti</h4>
+<p>Bir kuvvetin kuvveti, tabanı ilk kuvvetin tabanı olan ve üssü üslerin <strong>çarpımı</strong> olan bir kuvvete eşittir.</p>
+<p><span class="math display">\[
+\left( a^n \right)^m = a^{n \cdot m}
+\]</span></p>
+<p>Örneğin, <span class="math inline">\((2^3)^4 = 2^{3 \cdot 4} = 2^{12}\)</span>.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopyalandı");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopyalandı");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Hoşgeldiniz">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hoşgeldiniz</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./99-kaynakca.html" class="pagination-link" aria-label="Kaynakça">
+        <span class="nav-page-text">Kaynakça</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
